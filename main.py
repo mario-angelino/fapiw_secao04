@@ -49,6 +49,22 @@ async def faq(request: Request):
     return templates.TemplateResponse('home/faq.html', context=context)
 
 
+@app.get('/blog_home', name='blog_home')
+async def blog_home(request: Request):
+    context = {
+        "request": request
+    }
+    return templates.TemplateResponse('home/blog_home.html', context=context)
+
+
+@app.get('/blog_post', name='blog_post')
+async def blog_post(request: Request):
+    context = {
+        "request": request
+    }
+    return templates.TemplateResponse('home/blog_post.html', context=context)
+
+
 if __name__ == '__main__':
     import uvicorn
     uvicorn.run(app='main:app', host='0.0.0.0',
