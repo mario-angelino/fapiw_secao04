@@ -65,6 +65,22 @@ async def blog_post(request: Request):
     return templates.TemplateResponse('home/blog_post.html', context=context)
 
 
+@app.get('/portfolio_overview', name='portfolio_overview')
+async def portfolio_overview(request: Request):
+    context = {
+        "request": request
+    }
+    return templates.TemplateResponse('home/portfolio_overview.html', context=context)
+
+
+@app.get('/portfolio_item', name='portfolio_item')
+async def portfolio_item(request: Request):
+    context = {
+        "request": request
+    }
+    return templates.TemplateResponse('home/portfolio_item.html', context=context)
+
+
 if __name__ == '__main__':
     import uvicorn
     uvicorn.run(app='main:app', host='0.0.0.0',
