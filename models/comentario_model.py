@@ -1,7 +1,6 @@
 # models/comentario_model.py
-from typing import List, Optional
 from datetime import datetime
-from sqlalchemy import Column, Integer, String, Table, ForeignKey, DateTime
+from sqlalchemy import Column, Integer, String, ForeignKey, DateTime
 import sqlalchemy.orm as orm
 from core.configs import settings
 from models.blog_post_model import BlogPostModel

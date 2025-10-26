@@ -1,4 +1,4 @@
-# models/blog_post_models.py
+# models/blog_post_model.py
 from typing import List, Optional
 from datetime import datetime
 import sqlalchemy.orm as orm

@@ -1,4 +1,4 @@
-# models/faq_models.py
+# models/faq_model.py
 import sqlalchemy.orm as orm
 from sqlalchemy import Column, Integer, String, ForeignKey
 from core.configs import settings
