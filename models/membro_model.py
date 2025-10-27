@@ -1,5 +1,6 @@
 # models/membro_model.py
 from sqlalchemy import Column, Integer, String
+from sqlalchemy.orm import validates
 from core.configs import settings
 
 
@@ -10,3 +11,10 @@ class MembroModel(settings.DBBaseModel):
     nome: str = Column(String(255))
     funcao: str = Column(String(100))
     foto_url: str = Column(String(255))
+
+    @validates('funcao')
+    def valida_funcao(self, key, value):
+        if value is None or value == '':
+            raise ValueError('Você precisa informar uma função válida.')
+
+        return value

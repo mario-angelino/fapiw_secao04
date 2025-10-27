@@ -4,7 +4,7 @@ from sqlalchemy import Column, Integer, String, DateTime
 from core.configs import settings
 
 
-class ComentarioModel(settings.DBBaseModel):
+class ProjetoModel(settings.DBBaseModel):
     """No website temos um portfolio de projetos"""
     __tablename__ = 'projetos'
 

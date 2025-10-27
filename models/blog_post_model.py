@@ -6,7 +6,7 @@ from sqlalchemy import Column, Integer, String, DateTime, Table, ForeignKey
 from core.configs import settings
 from models.tag_model import TagModel
 from models.autor_model import AutorModel
-from models.comentario_model import ComentarioModel
+# from models.comentario_model import ComentarioModel
 
 # Blog_post pode ter várias tags
 tags_post = Table(
@@ -43,5 +43,5 @@ class BlogPostModel(settings.DBBaseModel):
         'TagModel', secondary='tags_post', backref='tagp', lazy='joined')
 
     # Um post pode ter vários comentários
-    comentarios: Optional[List[ComentarioModel]] = orm.relationship(
+    comentarios: Optional[List[object]] = orm.relationship(
         'ComentarioModel', secondary='comentarios_post', backref='comentariop', lazy='joined')
