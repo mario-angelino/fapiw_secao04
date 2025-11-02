@@ -109,7 +109,6 @@ class MembroAdmin(BaseCrudView):
         """
         membro_controller: MembroController = MembroController(request)
         id_membro: int = request.path_params['id_membro']
-        print(f"[membro_admin.py] id_membro: {id_membro}")
         return await super().object_delete(object_controller=membro_controller, id_obj=id_membro)
 
 
