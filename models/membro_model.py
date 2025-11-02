@@ -10,11 +10,16 @@ class MembroModel(settings.DBBaseModel):
     id: int = Column(Integer, primary_key=True, autoincrement=True)
     nome: str = Column(String(255))
     funcao: str = Column(String(100))
-    foto_url: str = Column(String(255))
+    imagem: str = Column(String(255))
+
+    @validates('nome')
+    def valida_funcao(self, key, value):
+        if value is None or value == '':
+            raise ValueError('Você precisa informar um nome válido.')
+        return value
 
     @validates('funcao')
     def valida_funcao(self, key, value):
         if value is None or value == '':
             raise ValueError('Você precisa informar uma função válida.')
-
         return value

@@ -21,19 +21,19 @@ class MembroController(BaseController):
         if form:
             nome: str = form.get('nome')
             funcao: str = form.get('funcao')
-            foto_url: UploadFile = form.get('foto_url')
+            imagem: UploadFile = form.get('imagem')
 
             # nome aleatório para a imagem
-            arquivo_ext: str = foto_url.filename.split('.')[-1]
+            arquivo_ext: str = imagem.filename.split('.')[-1]
             novo_nome: str = f"{str(uuid4())}.{arquivo_ext}"
 
             # instanciar o objeto
             membro: MembroModel = MembroModel(
-                nome=nome, funcao=funcao, foto_url=novo_nome)
+                nome=nome, funcao=funcao, imagem=novo_nome)
 
             # fazer o upload do arquivo
             async with async_open(f"{settings.MEDIA}/{novo_nome}", "wb") as afile:
-                await afile.write(foto_url.file.read())
+                await afile.write(imagem.file.read())
 
             # cria a sessão e insere no banco de dados
             async with get_session() as session:
@@ -52,18 +52,18 @@ class MembroController(BaseController):
                 if form:
                     nome: str = form.get('nome')
                     funcao: str = form.get('funcao')
-                    foto_url: UploadFile = form.get('foto_url')
+                    imagem: UploadFile = form.get('imagem')
 
                     if nome and nome != membro.nome:
                         membro.nome = nome
                     if funcao and funcao != membro.funcao:
                         membro.funcao = funcao
-                    if foto_url:
-                        arquivo_ext: str = foto_url.filename.split('.')[-1]
+                    if imagem:
+                        arquivo_ext: str = imagem.filename.split('.')[-1]
                         novo_nome: str = f"{str(uuid4())}.{arquivo_ext}"
                         membro.foto_url = novo_nome
                         async with async_open(f"{settings.MEDIA}/{novo_nome}", "wb") as afile:
-                            await afile.write(foto_url.file.read())
+                            await afile.write(imagem.file.read())
 
                     session.add(membro)
                     await session.commit()

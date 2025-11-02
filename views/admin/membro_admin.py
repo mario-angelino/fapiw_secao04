@@ -14,15 +14,15 @@ class MembroAdmin(BaseCrudView):
     def __init__(self):
         self.router = APIRouter()
         self.router.routes.append(Route(
-            path='membro/list', endpoint=self.object_list, methods=['GET',], name='membro_list'))
+            path='/membro/list', endpoint=self.object_list, methods=['GET',], name='membro_list'))
         self.router.routes.append(Route(
-            path='membro/create', endpoint=self.object_create, methods=['GET', 'POST'], name='membro_create'))
+            path='/membro/create', endpoint=self.object_create, methods=['GET', 'POST'], name='membro_create'))
         self.router.routes.append(Route(
-            path='membro/details/{id_membro: int}', endpoint=self.object_details, methods=['GET',], name='membro_details'))
+            path='/membro/details/{id_membro:int}', endpoint=self.object_edit, methods=['GET',], name='membro_details'))
         self.router.routes.append(Route(
-            path='membro/edit/{id_membro: int}', endpoint=self.object_edit, methods=['GET', 'POST'], name='membro_edit'))
+            path='/membro/edit/{id_membro:int}', endpoint=self.object_edit, methods=['GET', 'POST'], name='membro_edit'))
         self.router.routes.append(Route(
-            path='membro/delete/{id_membro: int}', endpoint=self.object_delete, methods=['DELETE',], name='membro_delete'))
+            path='/membro/delete/{id_membro:int}', endpoint=self.object_delete, methods=['DELETE',], name='membro_delete'))
         super().__init__('membro')
 
     async def object_list(self, request: Request) -> Response:
@@ -65,7 +65,7 @@ class MembroAdmin(BaseCrudView):
             return settings.TEMPLATES.TemplateResponse(f"admin/membro/create.html", context=context)
 
         # Se deu tudo certo, envia para lista de membros
-        return RedirectResponse(request.url_for("membro_list"), status_code=status.HTTP_201_CREATED)
+        return RedirectResponse(request.url_for("membro_list"), status_code=status.HTTP_302_FOUND)
 
     async def object_edit(self, request: Request) -> Response:
         """
@@ -101,7 +101,7 @@ class MembroAdmin(BaseCrudView):
             return settings.TEMPLATES.TemplateResponse(f"admin/membro/edit.html", context=context)
 
         # Se deu tudo certo, envia para lista de membros
-        return RedirectResponse(request.url_for("membro_list"), status_code=status.HTTP_202_ACCEPTED)
+        return RedirectResponse(request.url_for("membro_list"), status_code=status.HTTP_302_FOUND)
 
     async def object_delete(self, request: Request) -> Response:
         """
@@ -109,6 +109,7 @@ class MembroAdmin(BaseCrudView):
         """
         membro_controller: MembroController = MembroController(request)
         id_membro: int = request.path_params['id_membro']
+        print(f"[membro_admin.py] id_membro: {id_membro}")
         return await super().object_delete(object_controller=membro_controller, id_obj=id_membro)
 
 
